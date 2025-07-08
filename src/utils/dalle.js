@@ -3,7 +3,7 @@ export async function generateDalleImage(prompt) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPENAI_API_KEY}`,
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,  // ✅ updated here
     },
     body: JSON.stringify({
       prompt: `Fashion sketch of ${prompt}, flat style, minimal background, full outfit`,
@@ -14,7 +14,6 @@ export async function generateDalleImage(prompt) {
 
   const data = await response.json();
 
-  // Optional: log the image URL for debugging
   console.log("Generated DALL·E image URL:", data?.data?.[0]?.url);
 
   return data?.data?.[0]?.url;

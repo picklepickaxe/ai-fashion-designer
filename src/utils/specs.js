@@ -3,7 +3,7 @@ export async function getFashionSpecs(prompt) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPENAI_API_KEY}`,
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`, // ✅ safe key
     },
     body: JSON.stringify({
       model: "gpt-4",

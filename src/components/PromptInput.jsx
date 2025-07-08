@@ -1,8 +1,6 @@
 'use client';
 
 import { useState } from "react";
-import { generateDalleImage } from "../utils/dalle";
-import { getFashionSpecs } from "../utils/specs";
 
 export default function PromptInput({ onImageReady }) {
   const [prompt, setPrompt] = useState("");
@@ -13,9 +11,22 @@ export default function PromptInput({ onImageReady }) {
     if (!prompt.trim()) return;
 
     setLoading(true);
-    const imageUrl = await generateDalleImage(prompt);
-    const specs = await getFashionSpecs(prompt);
-    onImageReady(imageUrl, prompt, specs);
+
+    try {
+      const res = await fetch("/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt }),
+      });
+
+      const { imageUrl, specs } = await res.json();
+      onImageReady(imageUrl, prompt, specs);
+    } catch (err) {
+      console.error("Failed to generate design:", err);
+    }
+
     setLoading(false);
     setPrompt("");
   };
