@@ -8,7 +8,7 @@ export async function generateDalleImage(prompt) {
     body: JSON.stringify({
       prompt: `Fashion sketch of ${prompt}, flat style, minimal background, full outfit`,
       n: 1,
-      size: "512x512",
+      size: "256x256",
     }),
   });
 

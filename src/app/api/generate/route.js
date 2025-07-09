@@ -48,7 +48,7 @@ export async function POST(req) {
         model: "dall-e-2",  // Ensure this is correct
         prompt: `Fashion sketch of ${prompt}, flat style, minimal background, full outfit`,
         n: 1,
-        size: "512x512",
+        size: "256x256",
       }),
     });
 
